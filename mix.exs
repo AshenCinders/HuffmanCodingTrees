@@ -3,17 +3,22 @@ defmodule Huffmancodingtrees.MixProject do
 
   def project do
     [
-      app: :huffmancodingtrees,
+      app: :hman,
       version: "0.1.0",
-      elixir: "~> 1.12",
+      elixir: "~> 1.17.2",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      # Can just do "mix" instead of "mix run"
+      default_task: "run",
     ]
   end
 
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
+      # "mod: {Hman, []}" is what causes the app to start
+      # when "mix run" in terminal.
+      mod: {Hman, []},
       extra_applications: [:logger]
     ]
   end
