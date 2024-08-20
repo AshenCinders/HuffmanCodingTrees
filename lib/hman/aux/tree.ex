@@ -46,4 +46,10 @@ defmodule Hman.Aux.Tree do
       elem(node, 2)
     end
   end
+  def leaf?(node) do
+    cond do
+      is_nil(Get.left(node)) and is_nil(Get.right(node)) -> true
+      true -> false
+    end
+  end
 end
