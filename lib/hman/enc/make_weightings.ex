@@ -12,13 +12,13 @@ defmodule Hman.Enc.MakeWeightings do
     char = hd(lst)
 
     result =
-      case Enum.find_index(result, fn x -> x == char end) do
+      case Enum.find_index(result, fn x -> elem(x, 1) == char end) do
         nil ->
           [{1, char} | result]
 
         index ->
           {weight, char} = Enum.at(result, index)
-          List.insert_at(result, index, {weight + 1, char})
+          List.replace_at(result, index, {weight + 1, char})
       end
 
     count_chars(tl(lst), result)
