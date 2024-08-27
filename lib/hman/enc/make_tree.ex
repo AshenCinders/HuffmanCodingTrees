@@ -56,8 +56,8 @@ defmodule Hman.Enc.MakeTree do
     node2 = hd(tl(queue))
 
     new_weight =
-      elem(Tree.Get.data(node1), 0) +
-        elem(Tree.Get.data(node2), 0)
+      get_weight(node1) +
+        get_weight(node2)
 
     tree = Tree.Set.new_node(node1, node2, {new_weight, :travel_node})
     queue = insert_sorted_queue(queue, tree)
@@ -77,8 +77,8 @@ defmodule Hman.Enc.MakeTree do
     {:error, :too_few_elements}
   end
 
-  def new_huffman_tree(lst) do
-    func = &(elem(Tree.Get.data(&1), 0) >= elem(Tree.Get.data(&2), 0))
+  def new_huffman_tree(lst) when length(lst) >= 2 do
+    func = &(get_weight(&1) <= get_weight(&2))
 
     queue =
       Weighting.weights_to_nodes(lst)
