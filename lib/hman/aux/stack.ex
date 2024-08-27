@@ -33,7 +33,7 @@ defmodule Hman.Aux.Stack do
 
   @spec pop(Stack.t()) :: Stack.t()
   def pop(stack) do
-    {[tl(elem(stack, 0))], elem(stack, 1) - 1}
+    {tl(elem(stack, 0)), elem(stack, 1) - 1}
   end
 
   @spec top(Stack.t()) :: any()
