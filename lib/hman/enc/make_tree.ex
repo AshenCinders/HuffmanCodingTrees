@@ -67,14 +67,14 @@ defmodule Hman.Enc.MakeTree do
 
   @doc """
   Generates a huffman_tree.
-  Takes a list of weightings and chars and returns an ok-tuple
-  with a huffman_tree if more than two chars have been supplied, otherwise
+  Takes a list of weights and chars, returns an ok-tuple
+  with a huffman_tree if more than two elements have been supplied, otherwise
   returns an error-tuple.
   """
-  @spec new_huffman_tree(list({number(), char()})) :: {:error, String.t()}
+  @spec new_huffman_tree([] | list({number(), char()})) :: {:error, :too_few_elements}
   @spec new_huffman_tree(list({number(), char()})) :: {:ok, huffman_tree()}
-  def new_huffman_tree(lst) when length(lst) > 2 do
-    {:error, "Too few characters to generate tree."}
+  def new_huffman_tree(lst) when length(lst) < 2 do
+    {:error, :too_few_elements}
   end
 
   def new_huffman_tree(lst) do
