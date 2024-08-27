@@ -19,7 +19,7 @@ defmodule Hman.Enc.MakeTree do
   defmodule Weighting do
     @moduledoc false
 
-    defp weights_to_nodes(weights, nodes) when is_nil(weights) do
+    defp weights_to_nodes([], nodes) do
       nodes
     end
 
@@ -35,7 +35,10 @@ defmodule Hman.Enc.MakeTree do
 
   defp insert_sorted_queue(lst, element) do
     {weight, :travel_node} = Tree.Get.data(element)
-    index = Enum.find_index(lst, fn x -> elem(x, 0) >= weight end)
+    index = Enum.find_index(lst, fn x -> get_weight(x) >= weight end)
+
+    index = if is_nil(index), do: length(lst), else: index
+
     List.insert_at(lst, index, element)
   end
 
