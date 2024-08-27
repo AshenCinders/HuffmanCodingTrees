@@ -6,3 +6,5 @@ erl_crash.dump
 
 deps
 mix.lock
+
+doc
