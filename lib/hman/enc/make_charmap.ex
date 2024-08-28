@@ -22,18 +22,21 @@ defmodule Hman.Enc.MakeCharmap do
 
   defp gen_charmap(stck, char_map) do
     current = Stack.top(stck)
+
+    current_tree = elem(current, 0)
     bit_list = elem(current, 1)
+
     stck = Stack.pop(stck)
 
     {stck, char_map} =
-      case Tree.leaf?(current) do
+      case Tree.leaf?(current_tree) do
         true ->
-          c = HTree.get_char(current)
+          c = HTree.get_char(current_tree)
           {stck, Map.put(char_map, c, bit_list)}
 
         false ->
-          stck = Stack.push(stck, {Tree.Get.right(current), bit_list ++ [1]})
-          {Stack.push(stck, {Tree.Get.left(current), bit_list ++ [0]}), char_map}
+          stck = Stack.push(stck, {Tree.Get.right(current_tree), bit_list ++ [1]})
+          {Stack.push(stck, {Tree.Get.left(current_tree), bit_list ++ [0]}), char_map}
       end
 
     gen_charmap(stck, char_map)
