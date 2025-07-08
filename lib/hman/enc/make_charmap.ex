@@ -56,4 +56,13 @@ defmodule Hman.Enc.MakeCharmap do
 
     gen_charmap(node_stack, %{})
   end
+
+  @doc """
+  Takes a list of chars (single char strings) and extracts each corresponding bitlist.
+  The resulting 2-dimensional map is automatically flattned in the process.
+  """
+  @spec charlist_to_bitlist(list(char()), charmap()) :: [0 | 1]
+  def charlist_to_bitlist(list_of_chars, charmap) do
+    Enum.flat_map(list_of_chars, fn x -> charmap[x] end)
+  end
 end

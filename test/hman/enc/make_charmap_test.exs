@@ -39,4 +39,13 @@ defmodule MakeCharmapTest do
       assert length(cmap["b"]) <= length(cmap["c"])
     end
   end
+
+  describe "charlist_to_bitlist/2" do
+    test "produces a correct bitlist" do
+      charmap = %{"a" => [1, 0, 1, 0], "b" => [0, 0, 0], "c" => [1, 1, 1, 1, 1]}
+      charlist = ["b", "b", "a", "c", "a"]
+      expect = [0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0]
+      assert expect == MakeCharmap.charlist_to_bitlist(charlist, charmap)
+    end
+  end
 end
