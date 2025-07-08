@@ -32,8 +32,8 @@ defmodule Hman.Enc.MakeWeightings do
   Takes a grapheme list as agument
   and returns a list with tuples containing weight with chars.
   """
-  @spec weightings_from_graphemes(list(char())) :: list({number(), char()})
+  @spec weightings_from_graphemes(list(String.grapheme())) :: list({number(), char()})
   def weightings_from_graphemes(lst) do
-    count_chars(lst)
+    count_chars(to_charlist(lst))
   end
 end
