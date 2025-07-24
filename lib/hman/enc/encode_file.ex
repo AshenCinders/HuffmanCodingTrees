@@ -1,4 +1,4 @@
-defmodule EncodeFile do
+defmodule Hman.Enc.EncodeFile do
   alias Hman.Shared.Types
   alias Hman.Shared.Binary
   alias Hman.Enc.MakeWeightings
