@@ -9,11 +9,13 @@ defmodule Huffmancodingtrees.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       # Can just do "mix" instead of "mix run"
-      default_task: "run",
+      # default_task: "run",
+      default_task: "escript.build",
       docs: [
         main: "HuffmanCodingTrees",
         extras: ["README.md"]
-      ]
+      ],
+      escript: [main_module: Hman]
     ]
   end
 
@@ -22,7 +24,8 @@ defmodule Huffmancodingtrees.MixProject do
     [
       # "mod: {Hman, []}" is what causes the app to start
       # when "mix run" in terminal.
-      mod: {Hman, []},
+      # Uncomment if running as normal application, comment if with escript.
+      # mod: {Hman, []},
       extra_applications: [:logger]
     ]
   end

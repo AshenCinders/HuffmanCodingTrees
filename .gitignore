@@ -8,3 +8,6 @@ deps
 mix.lock
 
 doc
+
+hman
+!hman/

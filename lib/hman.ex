@@ -6,9 +6,10 @@ defmodule Hman do
   use Application
   alias Hman.Dispatch
 
-  # no clue why this is needed
-  def start() do
-    IO.puts("Starting up no args")
+  # Main is run by command binary produced by escript.
+  @spec main([binary()]) :: {:error, any()} | {:ok, pid()}
+  def main(args) do
+    start(nil, args)
   end
 
   @spec start(any(), [binary()]) :: {:error, any()} | {:ok, pid()}
