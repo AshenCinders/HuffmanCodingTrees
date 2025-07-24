@@ -14,7 +14,7 @@ defmodule Hman.Enc.MakeTree do
   """
   @type huffman_tree :: Hman.Aux.Tree.t()
 
-  alias Hman.Aux.Tree, as: Tree
+  alias Hman.Aux.Tree
 
   defmodule Weighting do
     @moduledoc false
