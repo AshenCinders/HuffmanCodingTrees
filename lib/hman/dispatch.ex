@@ -10,6 +10,7 @@ defmodule Hman.Dispatch do
   @spec run([binary()]) :: :ok
   def run(args) do
     # IO.inspect(args)
+
     {switches, _remaining, _invalid} =
       OptionParser.parse(args,
         strict: [encode: :string, decode: :string, help: :boolean],
@@ -17,8 +18,10 @@ defmodule Hman.Dispatch do
       )
 
     case switches do
-      [{:encode, _path} | _rest] ->
+      [{:encode, path} | _rest] ->
         IO.puts("Encode")
+        result = EncodeFile.txt_to_bin(path)
+        IO.inspect(result)
 
       [{:decode, _path} | _rest] ->
         IO.puts("Decode")

@@ -46,13 +46,17 @@ defmodule Hman.Enc.EncodeFile do
   end
 
   defp path_for_binary(text_path) do
-    date_time_str =
-      System.os_time()
-      |> DateTime.from_unix(:second)
+    {:ok, date_time} =
+      System.os_time(:second)
+      |> DateTime.from_unix()
+
+    time_str =
+      "#{date_time.year}-#{date_time.month}-#{date_time.day}-" <>
+        "#{date_time.hour}-#{date_time.minute}-#{date_time.second}"
 
     text_path
-    |> Path.basename(".txt")
-    |> Path.join("#{date_time_str}.bin")
+    |> Path.rootname()
+    |> (&(&1 <> time_str <> ".bin")).()
   end
 
   @spec txt_to_bin(String.t()) ::
@@ -71,7 +75,7 @@ defmodule Hman.Enc.EncodeFile do
          # Generate and store binary.
          binary = graphemes_to_binary(grapheme_list, tree),
          bin_path = path_for_binary(path_with_file),
-         {:ok, :write_success} = write_file(bin_path, binary) do
+         {:ok, :write_success} <- write_file(bin_path, binary) do
       {:ok, :encode_success}
     else
       {:error, type} -> {:error, type}
