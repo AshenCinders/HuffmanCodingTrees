@@ -1,5 +1,5 @@
 # getchar get_weight
-defmodule Hman.Enc.MakeTree do
+defmodule Hman.Encode.MakeTree do
   @moduledoc """
   For creating a `Types.htree()` used for
   encoding and decoding text to/from binary.

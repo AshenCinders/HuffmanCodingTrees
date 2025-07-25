@@ -1,7 +1,7 @@
 defmodule MakeTreeTest do
   use ExUnit.Case, async: true
-  alias Hman.Enc.MakeTree
-  alias Hman.Enc.MakeWeightings
+  alias Hman.Encode.MakeTree
+  alias Hman.Encode.MakeWeightings
   alias Hman.Aux.Tree
 
   describe("new_htree/1") do

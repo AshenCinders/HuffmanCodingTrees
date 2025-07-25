@@ -1,4 +1,4 @@
-defmodule Hman.Enc.MakeWeightings do
+defmodule Hman.Encode.MakeWeightings do
   @moduledoc """
   For creating a list containing tuples with weight
   (the number of occurences a character) and the char itself.

@@ -1,6 +1,6 @@
 defmodule MakeWeightingsTest do
   use ExUnit.Case, async: true
-  alias Hman.Enc.MakeWeightings
+  alias Hman.Encode.MakeWeightings
 
   describe "weightings_from_graphemes/1" do
     test "handles an empty list" do

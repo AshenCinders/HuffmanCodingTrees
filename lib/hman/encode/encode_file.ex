@@ -1,10 +1,10 @@
-defmodule Hman.Enc.EncodeFile do
+defmodule Hman.Encode.EncodeFile do
   alias Hman.Shared.Types
   alias Hman.Shared.Binary
-  alias Hman.Enc.MakeWeightings
-  alias Hman.Enc.MakeTree
-  alias Hman.Enc.MakeCharmap
   alias Hman.Shared.FileHandling
+  alias Hman.Encode.MakeWeightings
+  alias Hman.Encode.MakeTree
+  alias Hman.Encode.MakeCharmap
 
   # returns ok/error tuple from huffman fn
   @spec graphemes_to_tree([String.grapheme()]) ::

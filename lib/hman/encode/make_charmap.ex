@@ -1,4 +1,4 @@
-defmodule Hman.Enc.MakeCharmap do
+defmodule Hman.Encode.MakeCharmap do
   @moduledoc """
   Make a map for encoding chars to bits.
   Use `tree_to_charmap/1`.
@@ -13,7 +13,7 @@ defmodule Hman.Enc.MakeCharmap do
 
   alias Hman.Aux.Tree
   alias Hman.Aux.Stack
-  alias Hman.Enc.MakeTree
+  alias Hman.Encode.MakeTree
 
   # Equivalent check to Stack.empty? but is allowed in guard clause.
   defp gen_charmap(stck, char_map) when elem(stck, 1) == 0 do

@@ -5,7 +5,7 @@ defmodule Hman.Dispatch do
   E.g. decode a single file.
   """
 
-  alias Hman.Enc.EncodeFile
+  alias Hman.Encode.EncodeFile
 
   @spec run([binary()]) :: :ok
   def run(args) do

@@ -1,8 +1,8 @@
 defmodule MakeCharmapTest do
   use ExUnit.Case, async: true
-  alias Hman.Enc.MakeCharmap
-  alias Hman.Enc.MakeWeightings
-  alias Hman.Enc.MakeTree
+  alias Hman.Encode.MakeCharmap
+  alias Hman.Encode.MakeWeightings
+  alias Hman.Encode.MakeTree
 
   defp string_to_tree(str) do
     {:ok, tree} =
