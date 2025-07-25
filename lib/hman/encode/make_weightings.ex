@@ -29,7 +29,7 @@ defmodule Hman.Encode.MakeWeightings do
   end
 
   @doc """
-  Takes a grapheme list as agument
+  Takes a grapheme list as argument
   and returns a list with tuples containing weight with chars.
   """
   @spec weightings_from_graphemes(list(String.grapheme())) :: list({number(), char()})
