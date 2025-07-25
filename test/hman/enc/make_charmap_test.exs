@@ -9,7 +9,7 @@ defmodule MakeCharmapTest do
       str
       |> String.graphemes()
       |> MakeWeightings.weightings_from_graphemes()
-      |> MakeTree.new_huffman_tree()
+      |> MakeTree.new_htree()
 
     tree
   end

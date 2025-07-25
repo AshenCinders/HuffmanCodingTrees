@@ -4,17 +4,17 @@ defmodule MakeTreeTest do
   alias Hman.Enc.MakeWeightings
   alias Hman.Aux.Tree
 
-  describe("new_huffman_tree/1") do
+  describe("new_htree/1") do
     test "returns error if less than 2 elements" do
       weights = MakeWeightings.weightings_from_graphemes(String.graphemes("a"))
-      assert MakeTree.new_huffman_tree(weights) == {:error, :too_few_elements}
+      assert MakeTree.new_htree(weights) == {:error, :too_few_elements}
 
-      assert MakeTree.new_huffman_tree(String.graphemes("")) == {:error, :too_few_elements}
+      assert MakeTree.new_htree(String.graphemes("")) == {:error, :too_few_elements}
     end
 
     test "returns valid tree from 2 elements" do
       weights = MakeWeightings.weightings_from_graphemes(String.graphemes("ab"))
-      {:ok, tree} = MakeTree.new_huffman_tree(weights)
+      {:ok, tree} = MakeTree.new_htree(weights)
       assert Tree.Get.data(tree) == {2, :travel_node}
       assert Tree.Get.data(Tree.Get.left(tree)) == {1, "a"}
       assert Tree.Get.data(Tree.Get.right(tree)) == {1, "b"}
@@ -22,7 +22,7 @@ defmodule MakeTreeTest do
 
     test "calculates char count correctly" do
       weights = MakeWeightings.weightings_from_graphemes(String.graphemes("cccdddddddddd"))
-      {:ok, tree} = MakeTree.new_huffman_tree(weights)
+      {:ok, tree} = MakeTree.new_htree(weights)
       assert MakeTree.get_weight(tree) == 13
 
       left_data = Tree.Get.data(Tree.Get.left(tree))
@@ -36,7 +36,7 @@ defmodule MakeTreeTest do
         "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book."
 
       weights = MakeWeightings.weightings_from_graphemes(String.graphemes(long_string))
-      {:ok, tree} = MakeTree.new_huffman_tree(weights)
+      {:ok, tree} = MakeTree.new_htree(weights)
       assert MakeTree.get_weight(tree) == 297
     end
   end
@@ -47,7 +47,7 @@ defmodule MakeTreeTest do
         "21"
         |> String.graphemes()
         |> MakeWeightings.weightings_from_graphemes()
-        |> MakeTree.new_huffman_tree()
+        |> MakeTree.new_htree()
 
       assert MakeTree.get_char(tree) == :travel_node
 
@@ -65,7 +65,7 @@ defmodule MakeTreeTest do
         "hggg"
         |> String.graphemes()
         |> MakeWeightings.weightings_from_graphemes()
-        |> MakeTree.new_huffman_tree()
+        |> MakeTree.new_htree()
 
       assert MakeTree.get_weight(tree) == 4
 

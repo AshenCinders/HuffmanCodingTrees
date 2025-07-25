@@ -1,20 +1,12 @@
 # getchar get_weight
 defmodule Hman.Enc.MakeTree do
   @moduledoc """
-  For creating a `MakeTree.huffman_tree()` used for
+  For creating a `Types.htree()` used for
   encoding and decoding text to/from binary.
   """
 
-  @typedoc """
-  A tree structure used for encoding/decoding text to/from binary.
-  It follows the same structure as Hman.Aux.Tree.t(), and has its data value
-  as a tuple containing a weight and the corresponding char.
-  The structure is {number(), :travel_node} for travel nodes, and
-  {number(), char()} for leaf nodes.
-  """
-  @type huffman_tree :: Hman.Aux.Tree.t()
-
   alias Hman.Aux.Tree
+  alias Hman.Types
 
   defmodule Weighting do
     @moduledoc false
@@ -66,18 +58,18 @@ defmodule Hman.Enc.MakeTree do
   end
 
   @doc """
-  Generates a huffman_tree.
+  Generates an htree.
   Takes a list of weights and chars, returns an ok-tuple
-  with a huffman_tree if more than two elements have been supplied, otherwise
+  with an htree if more than two elements have been supplied, otherwise
   returns an error-tuple.
   """
-  @spec new_huffman_tree([] | list({number(), char()})) :: {:error, :too_few_elements}
-  @spec new_huffman_tree(list({number(), char()})) :: {:ok, huffman_tree()}
-  def new_huffman_tree(lst) when length(lst) < 2 do
+  @spec new_htree([] | list({number(), char()})) :: {:error, :too_few_elements}
+  @spec new_htree(list({number(), char()})) :: {:ok, Types.htree()}
+  def new_htree(lst) when length(lst) < 2 do
     {:error, :too_few_elements}
   end
 
-  def new_huffman_tree(lst) when length(lst) >= 2 do
+  def new_htree(lst) when length(lst) >= 2 do
     func = &(get_weight(&1) <= get_weight(&2))
 
     queue =
@@ -88,18 +80,18 @@ defmodule Hman.Enc.MakeTree do
   end
 
   @doc """
-  Returns the char (if a leaf) or :travel_node of a huffman_tree() node.
+  Returns the char (if a leaf) or :travel_node of a htree() node.
   """
-  @spec get_char(huffman_tree()) :: char() | :travel_node
+  @spec get_char(Types.htree()) :: char() | :travel_node
   def get_char(node) do
     Tree.Get.data(node)
     |> elem(1)
   end
 
   @doc """
-  Returns the weight number of a huffman_tree() node.
+  Returns the weight number of a htree() node.
   """
-  @spec get_weight(huffman_tree()) :: number()
+  @spec get_weight(Types.htree()) :: number()
   def get_weight(node) do
     Tree.Get.data(node)
     |> elem(0)

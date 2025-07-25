@@ -47,7 +47,7 @@ defmodule Hman.Enc.MakeCharmap do
   Takes a huffman tree as argument.
   Returns map containing chars as keys, with bit-lists (in order) as values.
   """
-  @spec tree_to_charmap(MakeTree.huffman_tree()) :: charmap()
+  @spec tree_to_charmap(MakeTree.htree()) :: charmap()
   def tree_to_charmap(tree) do
     node_stack = Stack.new_stack()
 
