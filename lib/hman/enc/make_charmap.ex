@@ -11,9 +11,9 @@ defmodule Hman.Enc.MakeCharmap do
   """
   @type charmap() :: %{char() => list(1 | 0)}
 
-  alias Hman.Aux.Tree, as: Tree
-  alias Hman.Aux.Stack, as: Stack
-  alias Hman.Enc.MakeTree, as: HTree
+  alias Hman.Aux.Tree
+  alias Hman.Aux.Stack
+  alias Hman.Enc.MakeTree
 
   # Equivalent check to Stack.empty? but is allowed in guard clause.
   defp gen_charmap(stck, char_map) when elem(stck, 1) == 0 do
@@ -31,7 +31,7 @@ defmodule Hman.Enc.MakeCharmap do
     {stck, char_map} =
       case Tree.leaf?(current_tree) do
         true ->
-          c = HTree.get_char(current_tree)
+          c = MakeTree.get_char(current_tree)
           {stck, Map.put(char_map, c, bit_list)}
 
         false ->

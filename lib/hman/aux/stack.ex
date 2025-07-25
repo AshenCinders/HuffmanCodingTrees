@@ -6,7 +6,6 @@ defmodule Hman.Aux.Stack do
   top/1 to get top-most element in the given stack.
   empty?/1 to check if given stack has any elements left.
   """
-  alias Hman.Aux.Stack
 
   @typedoc """
   A stack from the Hman.Aux.Stack module created from calling `new_stack()`
