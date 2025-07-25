@@ -11,12 +11,29 @@ defmodule Hman.Dispatch do
   def run(args) do
     # IO.inspect(args)
 
-    {switches, _remaining, _invalid} =
-      OptionParser.parse(args,
-        strict: [encode: :string, decode: :string, help: :boolean],
-        aliases: [e: :encode, d: :decode, h: :help]
-      )
+    {switches, _remaining, invalid} = parse(args)
 
+    cond do
+      length(invalid) != 0 ->
+        handle_invalid_usage()
+
+      # User typed only "./hman"
+      length(switches) == 0 ->
+        handle_help_usage()
+
+      true ->
+        handler_dispatch(switches)
+    end
+  end
+
+  defp parse(args) do
+    OptionParser.parse(args,
+      strict: [encode: :string, decode: :string, help: :boolean],
+      aliases: [e: :encode, d: :decode, h: :help]
+    )
+  end
+
+  defp handler_dispatch(switches) do
     case switches do
       [{:encode, path} | _rest] ->
         IO.puts("Encode")
@@ -27,12 +44,36 @@ defmodule Hman.Dispatch do
         IO.puts("Decode")
 
       [{:help, _} | _rest] ->
-        IO.puts("TODO help")
+        handle_help_usage()
 
       _ ->
-        IO.puts("Invalid arguments :(")
-        IO.puts("Make sure the flags and order of them are correct")
-        IO.puts("You can view usage with --help")
+        handle_invalid_usage()
     end
+  end
+
+  defp handle_help_usage() do
+    """
+    [Help docs]
+    hman usage:
+
+    --help       Show this help page
+    -h
+
+    --encode     Compress a .txt file into a .bin and an accompanying huffman tree
+    -e
+
+    --decode     Uncompress an (hman-created) .bin into a .txt file
+    -d
+    """
+    |> IO.write()
+  end
+
+  defp handle_invalid_usage() do
+    """
+    Invalid arguments :(
+    Make sure the flags and order of them are correct
+    You can view usage with --help
+    """
+    |> IO.write()
   end
 end
